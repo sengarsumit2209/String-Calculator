@@ -20,7 +20,19 @@ RSpec.describe StringCalculator do
 
     context 'when input contains a different delimiter than ,' do
       it 'returns the sum of the numbers' do
-        expect(@string_calculator.add("//;\n2;4;1")).to eq(7)
+        expect(@string_calculator.add("//;\n1;2")).to eq(3)
+      end
+    end
+
+    context 'when string contains negative numbers' do
+      it 'raises an exception listing negative numbers in message' do
+        expect { @string_calculator.add("1,-2,-3,4") }.to raise_error(StandardError, "negative numbers not allowed: -2,-3")
+      end
+    end
+
+    context 'when string contains negative numbers and different delimiter' do
+      it 'raises an exception listing negative numbers in message' do
+        expect { @string_calculator.add("//;\n2;-4;-1") }.to raise_error(StandardError, "negative numbers not allowed: -4,-1")
       end
     end
   end

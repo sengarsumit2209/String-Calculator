@@ -17,5 +17,11 @@ RSpec.describe StringCalculator do
         expect(@string_calculator.add("1,2,3,4")).to eq(10)
       end
     end
+
+    context 'when input contains a different delimiter than ,' do
+      it 'returns the sum of the numbers' do
+        expect(@string_calculator.add("//;\n2;4;1")).to eq(7)
+      end
+    end
   end
 end

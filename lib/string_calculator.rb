@@ -1,22 +1,33 @@
-# require 'byebug'
+require 'byebug'
 
 class StringCalculator
   def add(input_string)
     return 0 if input_string.empty?
-    symbol = '+'
+    # symbol = '+'
     
-    numbers = get_numbers_from_string(input_string)
+    delimeter, numbers = get_delimeter_and_numbers_from_string(input_string)
     check_for_negatives(numbers)
+    
+    initial_value = 1
+
+    # if delimeter == ',' || delimeter == ';'
+    # end
+    
+    unless delimeter == '*'
+      initial_value = 0 
+      delimeter = '+'
+    end
 
     #using inject by passing the symbol variable, which can be dynamic if required
-    numbers.inject(0, symbol.to_sym)
+    numbers.inject(initial_value, delimeter.to_sym)
   end
 
   private
 
-  def get_numbers_from_string(input_string)
+  def get_delimeter_and_numbers_from_string(input_string)
     delimiter, numbers = get_delimeter_and_numbers(input_string)
     numbers = numbers.split(delimiter).map(&:to_i)
+    [delimiter, numbers]
   end
 
   def get_delimeter_and_numbers(input_string)

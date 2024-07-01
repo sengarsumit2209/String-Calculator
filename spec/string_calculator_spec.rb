@@ -41,5 +41,11 @@ RSpec.describe StringCalculator do
         expect(@string_calculator.add("1,   5,   7")).to eq(13)
       end
     end
+
+    context 'when input contains a different delimiter which is *' do
+      it 'returns the multiplication of the numbers' do
+        expect(@string_calculator.add("//*\n1*2*5")).to eq(10)
+      end
+    end
   end
 end
